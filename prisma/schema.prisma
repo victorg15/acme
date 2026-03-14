@@ -18,7 +18,7 @@ enum InvoiceStatus {
   PAGO
 }
 
-model user{
+model User {
   id String @id @default(uuid())
   name String
   email String @unique
@@ -47,9 +47,9 @@ model Invoice {
   customerId String @map("customer_id")
   customer Customer @relation(fields: [customerId], references: [id])
 
-  createAt DateTime @default(now()) @map("create_app")
-  updateAt DateTime @updatedAt @map("update_app")
-  
+  createAt DateTime @default(now()) @map("create_at")
+  updateAt DateTime @updatedAt @map("update_at")
+
   @@index([customerId])
 
   @@map("invoices")

@@ -1,157 +1,159 @@
 import { PrismaClient, InvoiceStatus } from '@prisma/client';
 import bcrypt from 'bcryptjs';
-import { console } from 'inspector';
 
 const prisma = new PrismaClient();
 
-async function main(){
-    console.log('Iniciando população de banco de dados...');
+async function main() {
+  console.log('Iniciando população do banco de dados...');
 
-    const password = await bcrypt.hash('password', 10);
+  const password = await bcrypt.hash('password', 10);
 
-    const user = prisma.user.upsert({
-        where: { email: 'admin@acme.com'},
-        update: {},
-        create: {
-            name: 'Admin',
-            email: 'admin@acme.com',
-            password: password
-        } 
+  const user = await prisma.user.upsert({
+    where: { email: 'admin@acme.com' },
+    update: {},
+    create: {
+      name: 'Admin',
+      email: 'admin@acme.com',
+      password: password
+    }
+  });
+
+  console.log('Usuário criado com sucesso.');
+
+  const customer_data = [{
+    name: 'Alex Bessa',
+    email: 'alex@email.com',
+    imageUrl: 'https://ui-avatars.com/api/?name=Alex+Bessa&background=random'
+  }, {
+    name: 'Valdiana Bessa',
+    email: 'valdiana@email.com',
+    imageUrl: 'https://ui-avatars.com/api/?name=Valdiana+Bessa&background=random'
+  }, {
+    name: 'Timóteo Bessa',
+    email: 'timoteo@email.com',
+    imageUrl: 'https://ui-avatars.com/api/?name=Timoteo+Bessa&background=random'
+  }];
+
+  const customers = [];
+
+  for (const data of customer_data) {
+    const customer = await prisma.customer.upsert({
+      where: { email: data.email },
+      update: {},
+      create: data
     });
 
-    console.log ('Usuário criado com sucesso.');
+    customers.push(customer);
+    console.log(`Cliente criado: ${customer.name}`);
+  };
 
-    const customer_data = [{
-        name: 'Alex Bessa',
-        email: 'alex@email.com',
-        imageUrl: 'https://ui-avatars.com/api/?nome=Alex+Bessa&background=random'
-    }, {
-        name: 'Valdiana Bessa',
-        email: 'alex@email.com',
-        imageUrl: 'https://ui-avatars.com/api/?nome=Valdiana+Bessa&background=random'
-    }, {
-        name: 'Timóteo Bessa',
-        email: 'alex@email.com',
-        imageUrl: 'https://ui-avatars.com/api/?nome=Timóteo+Bessa&background=random'
-    }];
+  const invoicesData = [{
+    amount: 15785,
+    status: InvoiceStatus.PENDENTE,
+    date: '2026-05-29',
+    customer: customers[0]
+  }, {
+    amount: 5722,
+    status: InvoiceStatus.PENDENTE,
+    date: '2026-05-15',
+    customer: customers[1]
+  }, {
+    amount: 154225785,
+    status: InvoiceStatus.PENDENTE,
+    date: '2026-05-12',
+    customer: customers[2]
+  }, {
+    amount: 15474785,
+    status: InvoiceStatus.PENDENTE,
+    date: '2026-05-15',
+    customer: customers[0]
+  }, {
+    amount: 4747,
+    status: InvoiceStatus.PAGO,
+    date: '2026-05-05',
+    customer: customers[1]
+  }, {
+    amount: 747,
+    status: InvoiceStatus.PENDENTE,
+    date: '2026-05-16',
+    customer: customers[2]
+  }, {
+    amount: 7575,
+    status: InvoiceStatus.PENDENTE,
+    date: '2026-05-17',
+    customer: customers[0]
+  }, {
+    amount: 5777,
+    status: InvoiceStatus.PAGO,
+    date: '2026-05-03',
+    customer: customers[1]
+  }, {
+    amount: 5757,
+    status: InvoiceStatus.PAGO,
+    date: '2026-05-01',
+    customer: customers[2]
+  }, {
+    amount: 5757,
+    status: InvoiceStatus.PENDENTE,
+    date: '2026-05-20',
+    customer: customers[0]
+  }, {
+    amount: 5757,
+    status: InvoiceStatus.PAGO,
+    date: '2026-05-08',
+    customer: customers[1]
+  }, {
+    amount: 47477,
+    status: InvoiceStatus.PENDENTE,
+    date: '2026-05-21',
+    customer: customers[2]
+  }];
 
-    const customers = [];
-
-    for(const data of customer_data) {
-        const customer = await prisma.customer.upsert({
-            where: {email: data.email},
-            update: {},
-            create: data
-        });
-
-        customers.push(customer);
-        console.log(`Client criado: ${customer.name}`);
-    };
-
-    const invoicesData = [{
-            amount: 15785,
-            status: InvoiceStatus.PENDENTE,
-            date: '2026-12-05',
-            customer: customers[0]
-        }, {
-            amount: 1578645765,
-            status: InvoiceStatus.PENDENTE,
-            date: '2026-12-05',
-            customer: customers[1]
-        }, {
-            amount: 157435785,
-            status: InvoiceStatus.PENDENTE,
-            date: '2026-09-05',
-            customer: customers[2]
-        }, {
-            amount: 157746385,
-            status: InvoiceStatus.PENDENTE,
-            date: '2026-04-05',
-            customer: customers[0]
-        }, {
-            amount: 15634757785,
-            status: InvoiceStatus.PENDENTE,
-            date: '2026-03-05',
-            customer: customers[1]
-        }, {
-            amount: 155678785,
-            status: InvoiceStatus.PENDENTE,
-            date: '2026-09-05',
-            customer: customers[2]
-        }, {
-            amount: 15347657785,
-            status: InvoiceStatus.PENDENTE,
-            date: '2026-10-05',
-            customer: customers[0]
-        }, {
-            amount: 1578547655,
-            status: InvoiceStatus.PENDENTE,
-            date: '2026-12-05',
-            customer: customers[1]
-        }, {
-            amount: 15734231285,
-            status: InvoiceStatus.PENDENTE,
-            date: '2026-10-05',
-            customer: customers[2]
-        }, {
-            amount: 152432785,
-            status: InvoiceStatus.PENDENTE,
-            date: '2026-11-05',
-            customer: customers[0]
-        }, {
-            amount: 15743243285,
-            status: InvoiceStatus.PENDENTE,
-            date: '2026-01-05',
-            customer: customers[1]
-        },
-    ]
-
-
-for (const data of invoicesData) {
+  for (const data of invoicesData) {
     await prisma.invoice.create({
-       data: {
+      data: {
         amount: data.amount,
         status: data.status,
         date: new Date(data.date),
         customerId: data.customer.id
-       }
+      }
     });
-};
+  };
 
-console.log(`${invoicesData.length} faturas criadas.`)
+  console.log(`${invoicesData.length} faturas criadas.`);
 
-    const revenueData = [
-        {month: "Jan", revenue: 72167343},
-        {month: "Feb", revenue: 72167343},
-        {month: "Mar", revenue: 72167343},
-        {month: "Apr", revenue: 72167343},
-        {month: "Mai", revenue: 72167343},
-        {month: "Jun", revenue: 72167343},
-        {month: "Jul", revenue: 72167343},
-        {month: "Ago", revenue: 72167343},
-        {month: "Set", revenue: 72167343},
-        {month: "Out", revenue: 72167343},
-        {month: "Nov", revenue: 72167343},
-        {month: "Dez", revenue: 72167343},
-    ];
+  const revenueData = [
+    { month: 'Jan', revenue: 65748461 },
+    { month: 'Fev', revenue: 69562131 },
+    { month: 'Mar', revenue: 8556565 },
+    { month: 'Abr', revenue: 95653 },
+    { month: 'Mai', revenue: 9756232 },
+    { month: 'Jun', revenue: 98465103 },
+    { month: 'Jul', revenue: 1541656 },
+    { month: 'Ago', revenue: 8979613 },
+    { month: 'Set', revenue: 784152103 },
+    { month: 'Out', revenue: 3265232 },
+    { month: 'Nov', revenue: 1656566565 },
+    { month: 'Dez', revenue: 646562266 },
+  ];
 
-    for (const data of revenueData) {
-        await prisma.revenue.upsert({
-            where: { month: data.month},
-            update: { revenue: data.revenue},
-            create: data
-        });
-    };
+  for (const data of revenueData) {
+    await prisma.revenue.upsert({
+      where: { month: data.month },
+      update: { revenue: data.revenue },
+      create: data
+    });
+  };
 
-    console.log ('Dados de receita mensal criados.');
+  console.log('Dados de receita mensal criados.');
 
-    console.log('População concluida com sucesso.');
+  console.log('População concluída com sucesso.');
 };
 
 main()
-    .catch((erro) => {
-        console.log('Erro ao popular o banco:', erro);
-    })
-    .finally(async () => {
-        await prisma.$disconnect();
-    });
+  .catch((erro) => {
+    console.log('Erro ao popular o banco:', erro);
+  })
+  .finally(async () => {
+    await prisma.$disconnect();
+  });
