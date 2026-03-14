@@ -60,5 +60,5 @@ model Revenue {
   month String @unique
   revenue Int
 
-  @@map("renenues")
+  @@map("revenues")
 }

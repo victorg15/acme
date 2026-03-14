@@ -1,6 +1,5 @@
 import { PrismaClient, InvoiceStatus } from '@prisma/client';
 import bcrypt from 'bcryptjs';
-import { Console, error } from 'console';
 import { console } from 'inspector';
 
 const prisma = new PrismaClient();
@@ -52,57 +51,57 @@ async function main(){
     const invoicesData = [{
             amount: 15785,
             status: InvoiceStatus.PENDENTE,
-            data: '2026-15-05',
+            date: '2026-12-05',
             customer: customers[0]
         }, {
             amount: 1578645765,
             status: InvoiceStatus.PENDENTE,
-            date: '2026-15-05',
+            date: '2026-12-05',
             customer: customers[1]
         }, {
             amount: 157435785,
             status: InvoiceStatus.PENDENTE,
-            date: '2026-15-05',
+            date: '2026-09-05',
             customer: customers[2]
         }, {
             amount: 157746385,
             status: InvoiceStatus.PENDENTE,
-            date: '2026-15-05',
+            date: '2026-04-05',
             customer: customers[0]
         }, {
             amount: 15634757785,
             status: InvoiceStatus.PENDENTE,
-            date: '2026-15-05',
+            date: '2026-03-05',
             customer: customers[1]
         }, {
             amount: 155678785,
             status: InvoiceStatus.PENDENTE,
-            date: '2026-15-05',
+            date: '2026-09-05',
             customer: customers[2]
         }, {
             amount: 15347657785,
             status: InvoiceStatus.PENDENTE,
-            date: '2026-15-05',
+            date: '2026-10-05',
             customer: customers[0]
         }, {
             amount: 1578547655,
             status: InvoiceStatus.PENDENTE,
-            date: '2026-15-05',
+            date: '2026-12-05',
             customer: customers[1]
         }, {
             amount: 15734231285,
             status: InvoiceStatus.PENDENTE,
-            date: '2026-15-05',
+            date: '2026-10-05',
             customer: customers[2]
         }, {
             amount: 152432785,
             status: InvoiceStatus.PENDENTE,
-            date: '2026-15-05',
+            date: '2026-11-05',
             customer: customers[0]
         }, {
             amount: 15743243285,
             status: InvoiceStatus.PENDENTE,
-            date: '2026-15-05',
+            date: '2026-01-05',
             customer: customers[1]
         },
     ]
@@ -113,7 +112,7 @@ for (const data of invoicesData) {
        data: {
         amount: data.amount,
         status: data.status,
-        date: new Date(data.date ?? Date.now()),
+        date: new Date(data.date),
         customerId: data.customer.id
        }
     });
