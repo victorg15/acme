@@ -40,7 +40,7 @@ async function main() {
     const customer = await prisma.customer.upsert({
       where: { email: data.email },
       update: {},
-      create: data
+      create: data    
     });
 
     customers.push(customer);
@@ -49,61 +49,61 @@ async function main() {
 
   const invoicesData = [{
     amount: 15785,
-    status: InvoiceStatus.PENDENTE,
-    date: '2026-05-29',
-    customer: customers[0]
-  }, {
-    amount: 5722,
-    status: InvoiceStatus.PENDENTE,
-    date: '2026-05-15',
-    customer: customers[1]
-  }, {
-    amount: 154225785,
-    status: InvoiceStatus.PENDENTE,
-    date: '2026-05-12',
-    customer: customers[2]
-  }, {
-    amount: 15474785,
-    status: InvoiceStatus.PENDENTE,
-    date: '2026-05-15',
-    customer: customers[0]
-  }, {
-    amount: 4747,
     status: InvoiceStatus.PAGO,
-    date: '2026-05-05',
-    customer: customers[1]
-  }, {
-    amount: 747,
-    status: InvoiceStatus.PENDENTE,
-    date: '2026-05-16',
-    customer: customers[2]
-  }, {
-    amount: 7575,
-    status: InvoiceStatus.PENDENTE,
-    date: '2026-05-17',
+    date: '2026-10-29',
     customer: customers[0]
   }, {
-    amount: 5777,
+    amount: 57212434242,
+    status: InvoiceStatus.PENDENTE,
+    date: '2026-09-15',
+    customer: customers[1]
+  }, {
+    amount: 154225123785,
+    status: InvoiceStatus.PAGO,
+    date: '2026-12-12',
+    customer: customers[2]
+  }, {
+    amount: 15474741285,
+    status: InvoiceStatus.PENDENTE,
+    date: '2026-01-15',
+    customer: customers[0]
+  }, {
+    amount: 4741232147,
+    status: InvoiceStatus.PAGO,
+    date: '2026-08-05',
+    customer: customers[1]
+  }, {
+    amount: 7412432147,
+    status: InvoiceStatus.PENDENTE,
+    date: '2026-03-16',
+    customer: customers[2]
+  }, {
+    amount: 7572135,
+    status: InvoiceStatus.PAGO,
+    date: '2026-07-17',
+    customer: customers[0]
+  }, {
+    amount: 577217,
     status: InvoiceStatus.PAGO,
     date: '2026-05-03',
     customer: customers[1]
   }, {
-    amount: 5757,
+    amount: 57527,
     status: InvoiceStatus.PAGO,
     date: '2026-05-01',
     customer: customers[2]
   }, {
-    amount: 5757,
+    amount: 57571,
     status: InvoiceStatus.PENDENTE,
-    date: '2026-05-20',
+    date: '2026-01-20',
     customer: customers[0]
   }, {
-    amount: 5757,
+    amount: 575123127,
     status: InvoiceStatus.PAGO,
-    date: '2026-05-08',
+    date: '2026-02-08',
     customer: customers[1]
   }, {
-    amount: 47477,
+    amount: 474712327,
     status: InvoiceStatus.PENDENTE,
     date: '2026-05-21',
     customer: customers[2]
