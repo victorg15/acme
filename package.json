@@ -10,7 +10,8 @@
     "dev": "next dev",
     "lint": "eslint . --ext .js, .jsx, .ts, .tsx --no-error-on-unmatched-pattern",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "typecheck": "tsc --noEmit"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"
