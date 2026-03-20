@@ -53,27 +53,27 @@ async function main() {
     date: '2026-10-29',
     customer: customers[0]
   }, {
-    amount: 57212434242,
+    amount: 57212434,
     status: InvoiceStatus.PENDENTE,
     date: '2026-09-15',
     customer: customers[1]
   }, {
-    amount: 154225123785,
+    amount: 15422512,
     status: InvoiceStatus.PAGO,
     date: '2026-12-12',
     customer: customers[2]
   }, {
-    amount: 15474741285,
+    amount: 1547474,
     status: InvoiceStatus.PENDENTE,
     date: '2026-01-15',
     customer: customers[0]
   }, {
-    amount: 4741232147,
+    amount: 4741232,
     status: InvoiceStatus.PAGO,
     date: '2026-08-05',
     customer: customers[1]
   }, {
-    amount: 7412432147,
+    amount: 74124321,
     status: InvoiceStatus.PENDENTE,
     date: '2026-03-16',
     customer: customers[2]
@@ -98,12 +98,12 @@ async function main() {
     date: '2026-01-20',
     customer: customers[0]
   }, {
-    amount: 575123127,
+    amount: 5751231,
     status: InvoiceStatus.PAGO,
     date: '2026-02-08',
     customer: customers[1]
   }, {
-    amount: 474712327,
+    amount: 4747123,
     status: InvoiceStatus.PENDENTE,
     date: '2026-05-21',
     customer: customers[2]
