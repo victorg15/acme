@@ -6,9 +6,10 @@ import {
   findCustomerById, 
   updateCustomer
 } from '@/services/CustomerServices';
-import { ApiError } from '@/types';
+import { ApiError, SortOrder } from '@/types';
 import { get } from 'http';
 import { create } from 'domain';
+import { number } from 'zod/v4';
 
 export const createCustomerSchema = z.object({
   name: z
@@ -45,8 +46,12 @@ function buildErrorResponse(
 export const CustomerController = {
   async getAll(searchParams: URLSearchParams) {
     const search = searchParams.get('search') ?? undefined;
+    const page = Number(searchParams.get('page') || '1');
+    const limit = Number(searchParams.get('limit') || '10');
+    const sortBy = (searchParams.get('sortBy') ?? 'name') as string;
+    const order = (searchParams.get('order') as SortOrder) ?? 'asc';
 
-    const customer = await findAllCustomers({ search });
+    const customer = await findAllCustomers({ search, page, limit, sortBy, order });
 
     return {status: 200, body: customer};
   },
