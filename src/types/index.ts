@@ -37,7 +37,7 @@ export interface FindAllCustomersParams {
   page?: number;
   limit?: number;
   search?: string;
-  sortBy?: 'string';
+  sortBy?: string;
   order?: SortOrder;
 };
 
