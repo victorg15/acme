@@ -28,10 +28,22 @@ export interface Invoice {
   amount: number;
   dueDate: Date;
   status: InvoiceStatus;
+  customer: {
+    name: string;
+    email: string;
+    imageUrl: string;
+  }
 };
 
-export type CreateInvoiceData = Omit<Invoice, 'id'>;
+export type CreateInvoiceData = Omit<Invoice, 'id' | 'customer'>;
 export type UpdateInvoiceData = Partial<CreateInvoiceData>;
+
+export interface FindAllInvoicesParams {
+  page?: number;
+  limit?: number;
+  search?: string;
+  order?: SortOrder;
+};
 
 export interface FindAllCustomersParams {
   page?: number;
